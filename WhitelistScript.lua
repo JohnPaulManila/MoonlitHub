@@ -20,7 +20,7 @@ for i, v in next, hwidlist do
 end
 
 local data = http_request({
-    Url = ('https://celiac.000webhostapp.com/Scripts/Synapse.hash.lua');
+    Url = ('https://raw.githubusercontent.com/JohnPaulManila/MoonlitHub/main/HashKey.txt?token=AOBIK6GN7Y6A7A7APIR34Q274Q3XU');
     Method = 'GET';
 })
 
