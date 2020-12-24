@@ -2359,3 +2359,156 @@ riflen.IfConsumeAmmoThen = function(a, b, c, func)
 return func(true)
 end
 end
+
+if game.PlaceId == 5827078246 then
+local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
+local libWindow = lib.new(true, "Moonlit Hub")
+libWindow.ChangeBackgroundImage("rbxassetid://4692173685", 0.5)
+libWindow.ChangeToggleKey(Enum.KeyCode.F1)
+local RunService = game:GetService('RunService')
+local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+local MiscCategory = libWindow:Category('Main')
+local MiscS = MiscCategory:Sector('Coin Hero Simulator')
+_G.ACC = false
+MiscS:Cheat('Checkbox', 'Auto Collect: ', function(State)
+_G.ACC = State
+local Event = game:GetService('ReplicatedStorage').CoinToPlayer
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ACC then
+    Event:FireServer('1')
+end
+end)
+end)
+_G.AS = false
+MiscS:Cheat('Checkbox', 'Auto Sell: ', function(State)
+_G.AS = State
+local Path1 = game:GetService('ReplicatedStorage')
+local Event1 = Path1.Remotes.Sell
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.AS then
+    Event1:FireServer()
+end
+end)
+end)
+_G.ASS = false
+MiscS:Cheat('Checkbox', 'Auto Skill Speed: ', function(State)
+_G.ASS = State
+local Path1 = game:GetService('ReplicatedStorage')
+local Event2 = Path1.Remotes.Skill
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ASS then
+    Event2:FireServer('Speed')
+end
+end)
+end)
+_G.ASC = false
+MiscS:Cheat('Checkbox', 'Auto Skill Cosmos: ', function(State)
+_G.ASC = State
+local Path1 = game:GetService('ReplicatedStorage')
+local Event2 = Path1.Remotes.Skill
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ASC then
+    Event2:FireServer('Cosmos')
+end
+end)
+end)
+_G.AST = false
+MiscS:Cheat('Checkbox', 'Auto Skill Thunder: ', function(State)
+_G.AST = State
+local Path1 = game:GetService('ReplicatedStorage')
+local Event2 = Path1.Remotes.Skill
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.AST then
+    Event2:FireServer('Thunder')
+end
+end)
+end)
+_G.ABSS = false
+MiscS:Cheat('Checkbox', 'Auto Buy Skill Speed: ', function(State)
+_G.ABSS = State
+local Path1 = game:GetService('ReplicatedStorage')
+local BS = Path1.Remotes.BuySkill
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ABSS then
+    BS:InvokeServer('Speed')
+end
+end)
+end)
+_G.ABSC = false
+MiscS:Cheat('Checkbox', 'Auto Buy Skill Cosmos: ', function(State)
+_G.ABSC = State
+local Path1 = game:GetService('ReplicatedStorage')
+local BS = Path1.Remotes.BuySkill
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ABSC then
+    BS:InvokeServer('Cosmos')
+end
+end)
+end)
+_G.ABST = false
+MiscS:Cheat('Checkbox', 'Auto Buy Skill Thunder: ', function(State)
+_G.ABST = State
+local Path1 = game:GetService('ReplicatedStorage')
+local BS = Path1.Remotes.BuySkill
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ABST then
+    BS:InvokeServer('Thunder')
+end
+end)
+end)
+_G.ABB = false
+MiscS:Cheat('Checkbox', 'Auto Buy BackPack: ', function(State)
+_G.ABB = State
+local Path1 = game:GetService('ReplicatedStorage')
+local BPB = Path1.Remotes.BuyBackpack
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ABB then
+    BPB:InvokeServer()
+end
+end)
+end)
+_G.AR = false
+MiscS:Cheat('Checkbox', 'Auto Rank: ', function(State)
+_G.AR = State
+local Path1 = game:GetService('ReplicatedStorage')
+local ABR = Path1.Remotes.Rank
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.AR then
+    ABR:InvokeServer()
+end
+end)
+end)
+
+local CreditsCategory = libWindow:Category('Credits')
+local CreditsCreator = CreditsCategory:Sector('Developer - Information')
+CreditsCreator:Cheat("Label", "Moonlit Hub")
+CreditsCreator:Cheat("Label", "PepePIG#1430")
+CreditsCreator:Cheat('Button', 'Discord: ', function()
+setclipboard('https://discord.gg/PuCkrgW')
+    game.StarterGui:SetCore('SendNotification', {
+    Title = "Discord";
+    Text = "Link Copied";
+    Icon = "rbxassetid://5605321118";
+    Duration = 5;
+    })
+end, {
+    text = 'Copy Link'
+})
+CreditsCreator:Cheat('Button', 'Forum Profile: ', function()
+setclipboard('https://forum.robloxscripts.com/User-PepePIG')
+    game.StarterGui:SetCore('SendNotification', {
+    Title = "Forum Profile PepePIG";
+    Text = "Link Copied";
+    Icon = "rbxassetid://5605321118";
+    Duration = 5;
+    })
+end, {
+    text = 'Copy Link'
+})
+end
