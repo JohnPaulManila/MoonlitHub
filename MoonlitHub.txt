@@ -1947,7 +1947,28 @@ local CreditsCategory = libWindow:Category('Credits')
 local CreditsCreator = CreditsCategory:Sector('Developer - Information')
 CreditsCreator:Cheat("Label", "Moonlit Hub")
 CreditsCreator:Cheat("Label", "PepePIG @ discord.gg")
-CreditsCreator:Cheat("Label", "Discord Invite: https://discord.gg/PuCkrgW")
+CreditsCreator:Cheat('Button', 'Discord: ', function()
+setclipboard('https://discord.gg/PuCkrgW')
+    game.StarterGui:SetCore('SendNotification', {
+    Title = "Discord";
+    Text = "Link Copied";
+    Icon = "rbxassetid://5605321118";
+    Duration = 5;
+    })
+end, {
+    text = 'Copy Link'
+})
+CreditsCreator:Cheat('Button', 'Forum Profile: ', function()
+setclipboard('https://forum.robloxscripts.com/User-PepePIG')
+    game.StarterGui:SetCore('SendNotification', {
+    Title = "Forum Profile PepePIG";
+    Text = "Link Copied";
+    Icon = "rbxassetid://5605321118";
+    Duration = 5;
+    })
+end, {
+    text = 'Copy Link'
+})
 
 local http_request = http_request;
 if syn then
@@ -2154,7 +2175,7 @@ if game.PlaceId == 2029250188 then
 	local playergui = client:WaitForChild("PlayerGui")
 	playergui:SetTopbarTransparency(1)
 	local sg = Instance.new("ScreenGui", par)
-	sg.Name = "Moonlit HUB"
+	sg.Name = "Moonlit Hub"
 	sg.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	local main = Instance.new("Frame", sg)
 	main.Name = "main"
@@ -2215,7 +2236,7 @@ if game.PlaceId == 2029250188 then
 	line.Position = UDim2.new(0,0,1,0)
 	line.BorderSizePixel = 0
 	rainbow(line)
-	title.Text = "Moonlit HUB"
+	title.Text = "Moonlit Hub"
 	version.Text = "PepePIG#1430"
 local rifle = require(game.ReplicatedStorage.Resources.Modules.MachineArm)
 local rifleData = require(game.ReplicatedStorage.Resources.Modules.ToolData).MachineArm
