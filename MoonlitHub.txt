@@ -2057,8 +2057,8 @@ if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
 end
 
 local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
-local libWindow = lib.new(true, "Moonlit Hub", UDim2.new(0.30,0,0.5,0))
-libWindow.ChangeBackgroundImage("rbxassetid://4692173685", 0.5)
+local libWindow = lib.new(Theme, "Moonlit Hub", UDim2.new(0.30,0,0.5,0))
+libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
 libWindow.ChangeToggleKey(Enum.KeyCode.F1)
 local RunService = game:GetService('RunService')
 local vu = game:GetService("VirtualUser")
@@ -2341,8 +2341,8 @@ end
 
 if game.PlaceId == 5827078246 then
 local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
-local libWindow = lib.new(true, "Moonlit Hub")
-libWindow.ChangeBackgroundImage("rbxassetid://4692173685", 0.5)
+local libWindow = lib.new(Theme, "Moonlit Hub")
+libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
 libWindow.ChangeToggleKey(Enum.KeyCode.F1)
 local RunService = game:GetService('RunService')
 local vu = game:GetService("VirtualUser")
@@ -2463,6 +2463,103 @@ if _G.AR then
 end
 end)
 end)
+
+local CreditsCategory = libWindow:Category('Credits')
+local CreditsCreator = CreditsCategory:Sector('Developer - Information')
+CreditsCreator:Cheat("Label", "Moonlit Hub")
+CreditsCreator:Cheat("Label", "PepePIG#1430")
+CreditsCreator:Cheat('Button', 'Discord: ', function()
+setclipboard('https://discord.gg/PuCkrgW')
+    game.StarterGui:SetCore('SendNotification', {
+    Title = "Discord";
+    Text = "Link Copied";
+    Icon = "rbxassetid://5605321118";
+    Duration = 5;
+    })
+end, {
+    text = 'Copy Link'
+})
+CreditsCreator:Cheat('Button', 'Forum Profile: ', function()
+setclipboard('https://forum.robloxscripts.com/User-PepePIG')
+    game.StarterGui:SetCore('SendNotification', {
+    Title = "Forum Profile PepePIG";
+    Text = "Link Copied";
+    Icon = "rbxassetid://5605321118";
+    Duration = 5;
+    })
+end, {
+    text = 'Copy Link'
+})
+end
+
+if game.PlaceId == 5088131752 then
+local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
+local libWindow = lib.new(Theme, "Moonlit Hub", UDim2.new(0.30,0,0.5,0))
+libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
+libWindow.ChangeToggleKey(Enum.KeyCode.F1)
+local RunService = game:GetService('RunService')
+local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+local MiscCategory = libWindow:Category('Main')
+local MiscS = MiscCategory:Sector('Body Building Simulator')
+_G.ATS = false
+MiscS:Cheat('Checkbox', 'Auto Train Strength: ', function(State)
+_G.ATS = State
+local PP = game:GetService('Players').LocalPlayer.Name
+local REP = game:GetService('ReplicatedStorage')
+local Tool = {
+    [1] = game:GetService("Players")[PP].Backpack.Weight.Handle
+}
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ATS then
+    REP.addStrength:FireServer(unpack(Tool))
+end
+end)
+end)
+_G.ATD = false
+MiscS:Cheat('Checkbox', 'Auto Train Defence: ', function(State)
+_G.ATD = State
+local PP = game:GetService('Players').LocalPlayer.Name
+local REP = game:GetService('ReplicatedStorage')
+local Tool = {
+    [1] = game:GetService("Players")[PP].Backpack.Weight.Handle
+}
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.ATD then
+    REP.addDefense:FireServer(unpack(Tool))
+end
+end)
+end)
+_G.AR = false
+MiscS:Cheat('Checkbox', 'Auto Rebirth: ', function(State)
+_G.AR = State
+local REP = game:GetService('ReplicatedStorage')
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.AR then
+    REP.Rebirth:InvokeServer()
+end
+end)
+end)
+
+MiscS:Cheat('Textbox', 'Walk Speed', function(Value)
+    _G.WS = Value
+end, {
+    placeholder = "Number of Speed!"
+})
+MiscS:Cheat('Button', '', function()
+local USER=game.Players.LocalPlayer
+USER.Character.Humanoid.WalkSpeed = tonumber(_G.WS)
+if tonumber(_G.WS) == nil then 
+    USER.Character.Humanoid.WalkSpeed = 15
+end
+end, {
+    text = "Activate Speed"
+})
 
 local CreditsCategory = libWindow:Category('Credits')
 local CreditsCreator = CreditsCategory:Sector('Developer - Information')
