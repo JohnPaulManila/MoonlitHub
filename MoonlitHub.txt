@@ -160,9 +160,10 @@ local FloorNames = {
 	[12] = {[1] = 2659143505 ,[2] = '10 : Transylvania'},
 	[13] = {[1] = 5287433115 ,[2] = '11 : Hypersiddia'},
 	[14] = {[1] = 2724077776,[2] = 'Event Floor : Catacombs'}
+    [15] = {[1] = 6144637080,[2] = 'Event Floor : Snowflake Gorge'}
 }
 
-for k=1, 14 do
+for k=1, 15 do
 if game.PlaceId == FloorNames[k][1] then
 pcall(function()
 if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
@@ -575,6 +576,7 @@ end,{
     suffix = ' studs'
 })
 MainS:Cheat('Button', 'Boss Only', function()
+local SnowflakeGorge = 6144637080
 local Hypersiddia = 5287433115
 local Transylvania = 2659143505
 local VaRok = 573267292
@@ -640,6 +642,35 @@ end
 if game.PlaceId == Hypersiddia then
     print('NO BOSS in Floor 11')
 end
+if game.PlaceId == SnowflakeGorge then
+local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+local List = {}
+for _, k in next, workspace:GetDescendants() do
+    if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+end
+local Index = 2 
+firetouchinterest(PP, List[Index], 0)
+firetouchinterest(PP, List[Index], 1)   
+end
+
+local BossName='Wintula the Punisher'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-4661.48877,-319.864349,-1350.22363),79,false)
+end
+end)
 local BossName='Rahjin the Thief King'
 local Attacking
 workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
@@ -1499,6 +1530,7 @@ end, {
 })
 local TeleportCategory = libWindow:Category('Teleport')
 local TeleportS = TeleportCategory:Sector('Teleport')
+local Snowflakegorge = 6144637080
 local Hypersiddia = 5287433115
 local Transylvania = 2659143505
 local VaRok = 573267292
@@ -1569,6 +1601,16 @@ if game.PlaceId == Hypersiddia then
     Icon = "rbxassetid://5605321118";
     Duration = 5;
     })
+end
+if game.PlaceId == Snowflakegorge then
+local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+local List = {}
+for _, k in next, workspace:GetDescendants() do
+    if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+end
+local Index = 2 
+firetouchinterest(PP, List[Index], 0)
+firetouchinterest(PP, List[Index], 1)    
 end
 end, {
     text = "TP"
@@ -1723,7 +1765,7 @@ end, {
     text = "OFF"
 })
 
-
+--[[
 local TeleportSS = TeleportCategory:Sector('Maps')
 TeleportSS:Cheat('Button', "ReJoin Map", function()
 game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer,{auth = game.PlaceId})
@@ -1795,7 +1837,6 @@ game:GetService("TeleportService"):Teleport(5287433115, game.Players.LocalPlayer
 end, {
     text = "Hypersiddia"
 })
---[[
 TeleportSS:Cheat('Button', 'Event Map', function()
 game:GetService("TeleportService"):Teleport(2724077776, game.Players.LocalPlayer,{auth = 2724077776})
 end, {
