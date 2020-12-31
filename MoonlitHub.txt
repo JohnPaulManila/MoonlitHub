@@ -236,7 +236,8 @@ local IDs = {
     101291900,
     90258662,
     35311411,
-    163733925
+    163733925,
+    1390415574
 }
 function check(player)
     for i,v in next, IDs do 
