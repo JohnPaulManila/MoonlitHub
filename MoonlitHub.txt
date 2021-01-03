@@ -2089,6 +2089,8 @@ local Embed = {
 oldvel = vel.Value
 end)
 end)
+else
+    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 end
 
@@ -2189,6 +2191,8 @@ end, {
     text = 'Copy Link'
 })
 end)
+else
+    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 
 if game.PlaceId == 2029250188 then
@@ -2379,6 +2383,8 @@ end
 riflen.IfConsumeAmmoThen = function(a, b, c, func)
 return func(true)
 end
+else
+    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 
 if game.PlaceId == 5827078246 then
@@ -2532,6 +2538,8 @@ setclipboard('https://forum.robloxscripts.com/User-PepePIG')
 end, {
     text = 'Copy Link'
 })
+else
+    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 
 if game.PlaceId == 5088131752 then
@@ -2629,4 +2637,6 @@ setclipboard('https://forum.robloxscripts.com/User-PepePIG')
 end, {
     text = 'Copy Link'
 })
+else
+    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
