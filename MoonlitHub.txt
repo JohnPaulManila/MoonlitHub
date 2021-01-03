@@ -159,7 +159,7 @@ local FloorNames = {
 	[11] = {[1] = 573267292 ,[2] = "9 : Va' Rok"},
 	[12] = {[1] = 2659143505 ,[2] = '10 : Transylvania'},
 	[13] = {[1] = 5287433115 ,[2] = '11 : Hypersiddia'},
-	[14] = {[1] = 2724077776,[2] = 'Event Floor : Catacombs'}
+	[14] = {[1] = 2724077776,[2] = 'Event Floor : Catacombs'},
     [15] = {[1] = 6144637080,[2] = 'Event Floor : Snowflake Gorge'}
 }
 
