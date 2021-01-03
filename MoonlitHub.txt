@@ -2089,8 +2089,6 @@ local Embed = {
 oldvel = vel.Value
 end)
 end)
-else
-    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 end
 
@@ -2191,8 +2189,6 @@ end, {
     text = 'Copy Link'
 })
 end)
-else
-    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 
 if game.PlaceId == 2029250188 then
@@ -2538,8 +2534,6 @@ setclipboard('https://forum.robloxscripts.com/User-PepePIG')
 end, {
     text = 'Copy Link'
 })
-else
-    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 
 if game.PlaceId == 5088131752 then
@@ -2637,6 +2631,4 @@ setclipboard('https://forum.robloxscripts.com/User-PepePIG')
 end, {
     text = 'Copy Link'
 })
-else
-    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
