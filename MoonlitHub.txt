@@ -2379,8 +2379,6 @@ end
 riflen.IfConsumeAmmoThen = function(a, b, c, func)
 return func(true)
 end
-else
-    game:GetService('Players').LocalPlayer:Kick('Not Supported')
 end
 
 if game.PlaceId == 5827078246 then
