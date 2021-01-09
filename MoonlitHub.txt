@@ -295,6 +295,7 @@ end
 local attackingmob = false
 local Attacking = false
 local PlayerAttacking = false
+local PlayersAttackings = false
 local skillname = 'Leaping Slash'
 local DamageArea
 local getreg = debug.getregistry
@@ -364,7 +365,7 @@ end
 function GetPlayerList()
     local targets = {}
     for k, enemy in next, game.Players:GetChildren() do
-        if enemy.Name ~= 'm4nil410' and enemy.Name ~= '92N10' and enemy.Name ~= game.Players.LocalPlayer.Name and workspace:FindFirstChild(enemy.Name) and  workspace:FindFirstChild(enemy.Name):FindFirstChild('HumanoidRootPart') then
+        if enemy.Name ~= 'm4nil410' and enemy.Name ~= '92N10' and enemy.Name ~= 'LinoriaLinoria' and enemy.Name ~= game.Players.LocalPlayer.Name and workspace:FindFirstChild(enemy.Name) and  workspace:FindFirstChild(enemy.Name):FindFirstChild('HumanoidRootPart') then
             if workspace[enemy.Name].Entity.Health.Value > 0 and (game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Position - workspace[enemy.Name]:FindFirstChild('HumanoidRootPart').Position).Magnitude <= Range then
                 table.insert(targets, enemy)
             end
@@ -386,7 +387,6 @@ function AttackPlayer()
         end
     end)
 end
-
 
 --Items
 -----------------------------------------------------------------------------------------------
@@ -435,7 +435,6 @@ game.ReplicatedStorage.Profiles[game:GetService('Players').LocalPlayer.Name].Inv
         end
     end
 end)
-
 
 local MainCategory = libWindow:Category('Sword Burst 2')
 local MainS = MainCategory:Sector('Main')
@@ -1126,67 +1125,16 @@ end)
 MainS:Cheat('Checkbox', 'No Clip', function()
     noclip = not noclip
 end)
-_G.BSC=false
-MainS:Cheat('Checkbox', 'Burst Store Chest', function(State)
-_G.BSC=State
-game.ReplicatedStorage.Database.CashShop["Release Celebration Chest"].Listed.Value = true
-game.ReplicatedStorage.Database.CashShop["Winter Season Chest"].Listed.Value = true
-game.ReplicatedStorage.Database.CashShop["Fall Season Chest"].Listed.Value = true
-game.ReplicatedStorage.Database.CashShop["Festive Cape"].Listed.Value = true
-game.ReplicatedStorage.Database.CashShop["Festive Scarf"].Listed.Value = true
-game.ReplicatedStorage.Database.CashShop["Early Access Chest"].Listed.Value = true  
-end)
-_G.NCDT=false
-MainS:Cheat('Checkbox', 'No Cool Down Trade', function(State)
-_G.NCDT=State
-local delay = delay
-getrenv().delay = function(T, F)
-    if T == 0.5 then
-        return F()
-    end
-    return delay(T, F)
-end
-end)
-MainS:Cheat('Button', 'Spam Skill', function()
-for i,v in next, game.ReplicatedStorage.Database.Skills:GetChildren() do
-  if v:FindFirstChild("Class") then
-     v.Class:Remove()
-  end
-  if v:FindFirstChild("Anytime") then
-     v.Anytime:Remove()
-  end
-  if v:FindFirstChild("Cost") then
-     v.Cost.Value = -999999999
-  end
-  if v:FindFirstChild("Cooldown") then
-     v.Cooldown.Value = -999999999
-  end
-  if v:FindFirstChild("Level") then
-     v.Level.Value = -999999999
-  end
-end
-end, {
-    text = "No Cooldown Skill"
-})
-MainS:Cheat('Button', 'No Cost Dash', function()
-local P = game:GetService("Players").LocalPlayer
-while wait() do
-if P.Character then
-P.Character:WaitForChild("Entity").Stamina.Value = 100
-end
-end
-end, {
-    text = "Sprint"
-})
 --[[
+_G.PAF = false
 local FiltCategory = libWindow:Category('Filter Mobs')
 local FIL = FiltCategory:Sector('List of Mobs')
-FIL:Cheat('Checkbox', 'Filter Mobs', function(State)
-    FilterMode = State
+FIL:Cheat('Checkbox', 'AutoFarm', function(State)
+_G.PAF = State
 end)
 FIL:Cheat('Label', '')
 FIL:Cheat('Label', '')
-local EveryMobs = {
+local PriorityMobs = {
     [542351431] = { --1
         'Dire Wolf',
         'Rahjin the Thief King',
@@ -1294,16 +1242,26 @@ local EveryMobs = {
         'Shady Villager',
         'Wendigo',
         'Undead Servant'
+    },
+    [5287433115] = {
+        'Reaper',
+        'Command Falcon',
+        'Soul Eater',
+        'Shadow Figure',
+        '???????',
+        'Da',
+        'Ra',
+        'Ka'
     }
 }
-if EveryMobs[game.PlaceId] ~= nil then
-    for k, mob in next, EveryMobs[game.PlaceId] do
-FIL:Cheat('Checkbox', mob, function(State)
-    FilterMobs[mob] = State
-end)
-    FilterMobs[mob] = false
+if PriorityMobs[game.PlaceId] ~= nil then
+    for k, mob in next, PriorityMobs[game.PlaceId] do
+        FIL:Cheat('Checkbox', mob, function(State)
+            _G.PAF[mob] = State
+        end)
+            _G.PAF[mob] = false
+        end
     end
-end
 ]]--
 local MiscCategory = libWindow:Category('Misc')
 local MiscS = MiscCategory:Sector('Misc')
@@ -1451,6 +1409,117 @@ end
 end, {
     text = "Activate Speed"
 })
+
+MainS:Cheat('Button', 'Burst Store Chest: ', function()
+game.ReplicatedStorage.Database.CashShop["Release Celebration Chest"].Listed.Value = true
+game.ReplicatedStorage.Database.CashShop["Winter Season Chest"].Listed.Value = true
+game.ReplicatedStorage.Database.CashShop["Fall Season Chest"].Listed.Value = true
+game.ReplicatedStorage.Database.CashShop["Festive Cape"].Listed.Value = true
+game.ReplicatedStorage.Database.CashShop["Festive Scarf"].Listed.Value = true
+game.ReplicatedStorage.Database.CashShop["Early Access Chest"].Listed.Value = true  
+end, {
+    text = "Activate"
+})
+
+MainSS:Cheat('Button', 'No Cool Down Trade: ', function()
+local delay = delay
+getrenv().delay = function(T, F)
+    if T == 0.5 then
+        return F()
+    end
+    return delay(T, F)
+end
+end, {
+    text = 'Activate'
+})
+MainSS:Cheat('Button', 'Spam Skill: ', function()
+for i,v in next, game.ReplicatedStorage.Database.Skills:GetChildren() do
+  if v:FindFirstChild("Class") then
+     v.Class:Remove()
+  end
+  if v:FindFirstChild("Anytime") then
+     v.Anytime:Remove()
+  end
+  if v:FindFirstChild("Cost") then
+     v.Cost.Value = -999999999
+  end
+  if v:FindFirstChild("Cooldown") then
+     v.Cooldown.Value = -999999999
+  end
+  if v:FindFirstChild("Level") then
+     v.Level.Value = -999999999
+  end
+end
+end, {
+    text = "No Cooldown Skill"
+})
+MainSS:Cheat('Button', 'No Cost Dash: ', function()
+local P = game:GetService("Players").LocalPlayer
+while wait() do
+if P.Character then
+P.Character:WaitForChild("Entity").Stamina.Value = 100
+end
+end
+end, {
+    text = "Sprint"
+})
+MainSS:Cheat('Label', '')
+MainSS:Cheat('Label', '')
+MainSS:Cheat('Label', '')
+local PList = MainSS:Cheat('Dropdown', 'Player Name:', function(Option)
+    _G.PTarget = Option
+end, {
+    options = {'Player Name'}
+})
+_G.PTarget = 'Select Name!'
+PList:SetValue('Select Name!')
+for a, plr in next, game.Players:GetChildren() do
+    if plr ~= game.Players.LocalPlayer then
+        PList:AddOption(plr.Name)
+    end
+end
+game.Players.ChildAdded:Connect(function(Player)
+    if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
+        PList:AddOption(Player.Name)
+    end
+end)
+game.Players.ChildRemoved:Connect(function(Player)
+    if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
+        PList:RemoveOption(Player.Name)
+    end
+end)
+
+function GetTarget()
+    local PPTarget = {}
+    local PP = game:GetService('Players').LocalPlayer
+    for k, enemy in next, game.Players:GetChildren() do
+        if enemy.Name ~= PP.Name and enemy.Name ~= 'm4nil410' and enemy.Name ~= '92N10' and enemy.Name ~= 'LinoriaLinoria' and workspace:FindFirstChild(_G.PTarget) and  workspace:FindFirstChild(_G.PTarget):FindFirstChild('HumanoidRootPart') then
+            if workspace[_G.PTarget].Entity.Health.Value > 0 and (PP.Character:FindFirstChild('HumanoidRootPart').Position - workspace[_G.PTarget]:FindFirstChild('HumanoidRootPart').Position).Magnitude <= Range then
+                table.insert(PPTarget, _G.PTarget)
+            end
+        end
+    end
+    return PPTarget
+end
+
+function AttackPlayerTarget()
+    local attk
+    attk = RunService.Heartbeat:Connect(function()
+        if PlayersAttackings then
+            if Initialized then InitializeAoE() end
+            for k, enemy in next, GetTarget() do
+                AttackEntity(workspace[_G.PTarget],true)
+            end
+        else
+            attk:Disconnect()
+        end
+    end)
+end
+
+MainSS:Cheat('Checkbox', 'Kill', function(State)
+    PlayersAttackings = State
+    coroutine.resume(coroutine.create(AttackPlayerTarget))
+end)
 
 local MiscSS = MiscCategory:Sector('')
 MiscSS:Cheat("Label", "Dismantle Items")
