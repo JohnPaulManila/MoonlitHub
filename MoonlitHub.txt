@@ -438,6 +438,156 @@ end)
 
 local MainCategory = libWindow:Category('Sword Burst 2')
 local MainS = MainCategory:Sector('Main')
+local MobAList = MainS:Cheat('Dropdown', 'Monster A:', function(Option)
+    _G.MobA = Option
+end, {
+    options = {'Select Mobs'}
+})
+_G.MobA = 'Select Mobs!'
+MobAList:SetValue('Select Mobs!')
+for a, b in next, workspace.Mobs:GetChildren() do
+    if b.Name then
+        MobAList:AddOption(b.Name)
+    end
+end
+local MobBList = MainS:Cheat('Dropdown', 'Monster B:', function(Option)
+    _G.MobB = Option
+end, {
+    options = {'Select Mobs'}
+})
+_G.MobB = 'Select Mobs!'
+MobBList:SetValue('Select Mobs!')
+for c, d in next, workspace.Mobs:GetChildren() do
+    if d.Name then
+        MobBList:AddOption(d.Name)
+    end
+end
+local MobCList = MainS:Cheat('Dropdown', 'Monster C:', function(Option)
+    _G.MobC = Option
+end, {
+    options = {'Select Mobs'}
+})
+_G.MobC = 'Select Mobs!'
+MobCList:SetValue('Select Mobs!')
+for e, f in next, workspace.Mobs:GetChildren() do
+    if f.Name then
+        MobCList:AddOption(f.Name)
+    end
+end
+noclip = false
+game:GetService('RunService').Stepped:connect(function()
+if noclip then
+game.Players.LocalPlayer.Character:WaitForChild'Humanoid':ChangeState(11)
+    end
+end)
+_G.FarmA = false
+MainS:Cheat('Checkbox', 'AutoFarm Priority Mobs:', function(State)
+_G.FarmA = State
+noclip = not noclip
+local function tpwsbypass()
+    local mt = getrawmetatable(game)
+    if setreadonly then setreadonly(mt, false) elseif make_writeable then make_writeable(mt) end
+    local o_namecall = mt.__namecall; local o_newindex = mt.__newindex
+ 
+    mt.__namecall = function(self, ...)
+        local args = {...}
+        local method = args[#args]
+        if method == "Kick" or method == "BreakJoints" then
+            return
+        end
+        return o_namecall(self, ...)
+    end
+ 
+    mt.__newindex = function(t, k, v)
+        if k == "Health" then
+            return error("Bypassed.")
+        elseif k == "Value" and tostring(t) and tostring(t) == "Health" then
+            return error("Bypassed.")
+        end
+        return o_newindex(t, k, v)
+    end
+end
+tpwsbypass()
+local Tween
+local Player=game:GetService'Players'.LocalPlayer
+local TS=game:GetService'TweenService'
+local function CancelTeleport()
+    if Tween then
+        Tween:Cancel()
+        Tween=nil
+    end
+end
+local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
+    CF=(typeof(CF)=='vector3' and CFrame.new(CF)) or CF
+    local Character=Player.Character
+    local PP=Character and Character.PrimaryPart
+    if PP then
+        if Tween then
+            Tween:Cancel()
+            Tween=nil
+        end
+        Tween=TS:Create(PP,TweenInfo.new((CF.Position-PP.Position).Magnitude/StudsPerSecond,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut,0,false,0),{CFrame=CF})
+        Tween:Play()
+        if YieldUntilFinish then
+            Tween.Completed:Wait()
+        end
+    end
+end
+
+local plr = game.Players.LocalPlayer; 
+local char = plr.Character; 
+local data = char:WaitForChild("Entity", 5)
+
+local function Prio()
+    for i, v in next, workspace.Mobs:GetDescendants() do
+        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Entity") and v:FindFirstChild("Healthbar") then
+            if v.Name == _G.MobA then
+                return v
+            elseif v.Name == nil then
+                return v
+            elseif v.Name == _G.MobB then
+                return v
+            elseif v.Name == nil then
+                return v
+            elseif v.Name == _G.MobC then
+                return v
+            elseif v.Name == nil then
+                return v
+            end
+        end
+    end
+end   
+
+while _G.FarmA do
+    wait()
+    if not _G.FarmA then break end
+    local PMob = Prio()
+        if PMob then
+            repeat wait()
+                if plr.Character then
+                    char = plr.Character
+                else
+                    break
+                end
+                if char:FindFirstChild("Entity") then
+                    data = char.Entity
+                else
+                    break
+                end
+                if not PMob:FindFirstChild('HumanoidRootPart') then
+                    break
+                elseif not PMob:FindFirstChild('Entity') then
+                    break
+                elseif not PMob:FindFirstChild('Healthbar') then
+                    break
+                elseif not char:FindFirstChild('HumanoidRootPart') then
+                    break
+                end
+                Teleport(CFrame.new(PMob.PrimaryPart.Position + Vector3.new(0,15,0)),79,false)
+            until data.Health.Value <= 0 or not PMob or not _G.FarmA
+        end
+    end
+end)
 noclip = false
 game:GetService('RunService').Stepped:connect(function()
 if noclip then
