@@ -237,7 +237,8 @@ local IDs = {
     90258662,
     35311411,
     163733925,
-    1390415574
+    1390415574,
+    32099681
 }
 function check(player)
     for i,v in next, IDs do 
@@ -709,6 +710,209 @@ MainS:Cheat('Checkbox', 'Player Aura', function(State)
     PlayerAttacking = State
     coroutine.resume(coroutine.create(AttackPlayer))
 end)
+
+local PP = game:GetService('Players').LocalPlayer.Name
+local Ins = Instance.new('StringValue')
+local REP = game:GetService('ReplicatedStorage')
+local Way = REP.Profiles[PP].Skills
+Ins.Parent=Way
+Ins.Name='Summon Pistol'
+local attackingmob1 = false
+local Attacking1 = false
+local PlayerAttacking1 = false
+local PlayersAttackings1 = false
+local skillname1 = 'Summon Pistol'
+local DamageArea
+local getreg = debug.getregistry
+local getupvalues = debug.getupvalues
+for k, v in next, getreg() do
+    if type(v) == 'table' then
+        if v.DamageArea then DamageArea = v.DamageArea end
+    end
+end
+local rpcKey = getupvalues(DamageArea)[5]
+
+Initialized1 = true
+function InitializeAoE1()
+    Initialized1 = false
+    local Ins = Instance.new('StringValue')
+    local Skill = game.ReplicatedStorage.Profiles[game:GetService('Players').LocalPlayer.Name].Skills:GetChildren()
+    for a, b in next, Skill do
+        if b.Name == 'Summon Pistol' then
+            game:GetService("ReplicatedStorage").Event:FireServer('Skills', {'UseSkill' ,skillname1})
+        end
+    end
+end
+
+function AttackEntity1(entity)
+    return game:GetService("ReplicatedStorage").Event:FireServer("Combat", rpcKey, {"Attack", skillname1, 1, entity})
+end
+
+local Range = 30
+function getMobRange1()
+    local mobs = {}
+    for k, mob in next, workspace.Mobs:GetChildren() do
+        if mob.PrimaryPart and (PlrHumanoidRootPart.Position - mob:GetPrimaryPartCFrame().Position).magnitude < Range and mob.Entity.Health.Value > 0 then
+            table.insert(mobs,mob)
+        end
+    end
+    return mobs
+end
+
+function Attack1()
+    local atk
+    atk = RunService.Heartbeat:Connect(function()
+        if Attacking1 then
+            if Initialized1 then InitializeAoE1() end
+            for k, mob in next, getMobRange1() do
+                attackingmob1 = true
+                AttackEntity1(mob,true)
+            end
+            if getMobRange1()[1] == nil then
+                attackingmob1 = false
+            end
+        else
+            atk:Disconnect()
+        end
+    end)
+end
+
+
+function GetPlayerList1()
+    local targets = {}
+    for k, enemy in next, game.Players:GetChildren() do
+        if enemy.Name ~= 'm4nil410' and enemy.Name ~= '92N10' and enemy.Name ~= 'LinoriaLinoria' and enemy.Name ~= game.Players.LocalPlayer.Name and workspace:FindFirstChild(enemy.Name) and  workspace:FindFirstChild(enemy.Name):FindFirstChild('HumanoidRootPart') then
+            if workspace[enemy.Name].Entity.Health.Value > 0 and (game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Position - workspace[enemy.Name]:FindFirstChild('HumanoidRootPart').Position).Magnitude <= Range then
+                table.insert(targets, enemy)
+            end
+        end
+    end
+    return targets
+end
+
+function AttackPlayer1()
+    local atk
+    atk = RunService.Heartbeat:Connect(function()
+        if PlayerAttacking1 then
+            if Initialized1 then InitializeAoE1() end
+            for k, enemy in next, GetPlayerList() do
+                AttackEntity1(workspace[enemy.Name],true)
+            end
+        else
+            atk:Disconnect()
+        end
+    end)
+end
+MainS:Cheat('Checkbox', 'Pistol Mob Aura', function(State)
+    Attacking1 = State
+    coroutine.resume(coroutine.create(Attack1))
+end)
+MainS:Cheat('Checkbox', 'Pistol Player Aura', function(State)
+    PlayerAttacking1 = State
+    coroutine.resume(coroutine.create(AttackPlayer1))
+end)
+local PP = game:GetService('Players').LocalPlayer.Name
+local Insa = Instance.new('StringValue')
+local REP = game:GetService('ReplicatedStorage')
+local Way = REP.Profiles[PP].Skills
+Insa.Parent=Way
+Insa.Name='Summon Tree'
+local attackingmob2 = false
+local Attacking2 = false
+local PlayerAttacking2 = false
+local PlayersAttackings2 = false
+local skillname2 = 'Summon Tree'
+local DamageArea
+local getreg = debug.getregistry
+local getupvalues = debug.getupvalues
+for k, v in next, getreg() do
+    if type(v) == 'table' then
+        if v.DamageArea then DamageArea = v.DamageArea end
+    end
+end
+local rpcKey = getupvalues(DamageArea)[5]
+
+Initialized2 = true
+function InitializeAoE2()
+    Initialized2 = false
+    local Ins = Instance.new('StringValue')
+    local Skill = game.ReplicatedStorage.Profiles[game:GetService('Players').LocalPlayer.Name].Skills:GetChildren()
+    for a, b in next, Skill do
+        if b.Name == 'Summon Tree' then
+            game:GetService("ReplicatedStorage").Event:FireServer('Skills', {'UseSkill' ,skillname2})
+        end
+    end
+end
+
+function AttackEntity2(entity)
+    return game:GetService("ReplicatedStorage").Event:FireServer("Combat", rpcKey, {"Attack", skillname2, 1, entity})
+end
+
+local Range = 30
+function getMobRange2()
+    local mobs = {}
+    for k, mob in next, workspace.Mobs:GetChildren() do
+        if mob.PrimaryPart and (PlrHumanoidRootPart.Position - mob:GetPrimaryPartCFrame().Position).magnitude < Range and mob.Entity.Health.Value > 0 then
+            table.insert(mobs,mob)
+        end
+    end
+    return mobs
+end
+
+function Attack2()
+    local atk
+    atk = RunService.Heartbeat:Connect(function()
+        if Attacking2 then
+            if Initialized2 then InitializeAoE2() end
+            for k, mob in next, getMobRange2() do
+                attackingmob2 = true
+                AttackEntity2(mob,true)
+            end
+            if getMobRange2()[1] == nil then
+                attackingmob2 = false
+            end
+        else
+            atk:Disconnect()
+        end
+    end)
+end
+
+
+function GetPlayerList2()
+    local targets = {}
+    for k, enemy in next, game.Players:GetChildren() do
+        if enemy.Name ~= 'm4nil410' and enemy.Name ~= '92N10' and enemy.Name ~= 'LinoriaLinoria' and enemy.Name ~= game.Players.LocalPlayer.Name and workspace:FindFirstChild(enemy.Name) and  workspace:FindFirstChild(enemy.Name):FindFirstChild('HumanoidRootPart') then
+            if workspace[enemy.Name].Entity.Health.Value > 0 and (game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Position - workspace[enemy.Name]:FindFirstChild('HumanoidRootPart').Position).Magnitude <= Range then
+                table.insert(targets, enemy)
+            end
+        end
+    end
+    return targets
+end
+
+function AttackPlayer2()
+    local atk
+    atk = RunService.Heartbeat:Connect(function()
+        if PlayerAttacking2 then
+            if Initialized2 then InitializeAoE2() end
+            for k, enemy in next, GetPlayerList() do
+                AttackEntity2(workspace[enemy.Name],true)
+            end
+        else
+            atk:Disconnect()
+        end
+    end)
+end
+--[[
+MainS:Cheat('Checkbox', 'Pistol Mob Aura', function(State)
+    Attacking2 = State
+    coroutine.resume(coroutine.create(Attack2))
+end)
+]]--
+MainS:Cheat('Checkbox', 'Tree Aura', function(State)
+    PlayerAttacking2 = State
+    coroutine.resume(coroutine.create(AttackPlayer2))
+end)
 --[[
 MainS:Cheat('Slider', 'AoE Speed', function(Value)
     AttackSpeed = (1/Value)
@@ -725,556 +929,7 @@ end,{
     max = 60,
     suffix = ' studs'
 })
-MainS:Cheat('Button', 'Boss Only', function()
-local SnowflakeGorge = 6144637080
-local Hypersiddia = 5287433115
-local Transylvania = 2659143505
-local VaRok = 573267292
-local BloomingPlateau = 548878321
-local EntolomaGloomlands = 582198062
-local DesolateDunes = 580239979
-local HiddenWilds = 572487908
-local AvalancheExpense = 555980327
-local RedveilGrove = 548231754
-local VirhstWoodlands = 542351431
-local Tween
-local Player=game:GetService'Players'.LocalPlayer
-local TS=game:GetService'TweenService'
-local function CancelTeleport()
-    if Tween then
-        Tween:Cancel()
-        Tween=nil
-    end
-end
-local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
-    CF=(typeof(CF)=='vector3' and CFrame.new(CF)) or CF
-    local Character=Player.Character
-    local PP=Character and Character.PrimaryPart
-    if PP then
-        if Tween then
-            Tween:Cancel()
-            Tween=nil
-        end
-        Tween=TS:Create(PP,TweenInfo.new((CF.Position-PP.Position).Magnitude/StudsPerSecond,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut,0,false,0),{CFrame=CF})
-        Tween:Play()
-        if YieldUntilFinish then
-            Tween.Completed:Wait()
-        end
-    end
-end
-if game.PlaceId == VirhstWoodlands then
-    Teleport(CFrame.new(-2092.84131,319.95282,1664.3241),79,false) -- [[ Floor 1 ]] --
-end
-if game.PlaceId == RedveilGrove then
-    Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false) -- [[ Floor 2 ]] --
-end
-if game.PlaceId == AvalancheExpense then
-    Teleport(CFrame.new(-318.086517,4167.81885,-340.550507),79,false) -- [[ Floor 3 ]] --
-end
-if game.PlaceId == HiddenWilds then
-    Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false) -- [[ Floor 4 ]] --
-end
-if game.PlaceId == DesolateDunes then
-    Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false) -- [[ Floor 5 ]] --
-end
-if game.PlaceId == EntolomaGloomlands then
-    Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false) -- [[ Floor 7 ]] --
-end
-if game.PlaceId == BloomingPlateau then
-    Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false) -- [[ Floor 8 ]] --
-end
-if game.PlaceId == VaRok then
-    Teleport(CFrame.new(12481.2793, 428.948029,-3444.78247),79,false) -- [[ Floor 9 ]] --
-end
-if game.PlaceId == Transylvania then
-    Teleport(CFrame.new(317.134796,930.934631,23848.8262),79,false) -- [[ Floor 10 ]] --
-end
-if game.PlaceId == Hypersiddia then
-    print('NO BOSS in Floor 11')
-end
-if game.PlaceId == SnowflakeGorge then
-local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
-local List = {}
-for _, k in next, workspace:GetDescendants() do
-    if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
-end
-local Index = 2 
-firetouchinterest(PP, List[Index], 0)
-firetouchinterest(PP, List[Index], 1)   
-end
 
-local BossName='Wintula the Punisher'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-4661.48877,-319.864349,-1350.22363),79,false)
-end
-end)
-local BossName='Rahjin the Thief King'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-2092.84131,319.95282,1664.3241),79,false)
-end
-end)
-local BossName='Borik the BeeKeeper'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false)
-end
-end)
-local BossName="Ra'thae the Ice King"
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-318.086517,4167.81885,-340.550507),79,false)
-end
-end)
-local BossName='Irath the Lion'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false)
-end
-end)
-local BossName="Sa'jun the Centurian Chieftain"
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false)
-end
-end)
-local BossName='Smashroom'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false)
-end
-end)
-local BossName='Formaug the Jungle Giant'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false)
-end
-end)
-local BossName='Mortis the Flaming Sear'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(12346.4326,429.011932,-3503.52124),79,false)
-end
-end)
-local BossName='Grim the Overseer'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==BossName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(317.134796,930.934631,23848.8262),79,false)
-end
-end)
-end, {
-    text = "Start"
-})
-MainS:Cheat('Button', 'Mini Only', function()
-local Hypersiddia = 5287433115
-local Transylvania = 2659143505
-local VaRok = 573267292
-local BloomingPlateau = 548878321
-local EntolomaGloomlands = 582198062
-local DesolateDunes = 580239979
-local HiddenWilds = 572487908
-local AvalancheExpense = 555980327
-local RedveilGrove = 548231754
-local VirhstWoodlands = 542351431
-local Tween
-local Player=game:GetService'Players'.LocalPlayer
-local TS=game:GetService'TweenService'
-local function CancelTeleport()
-    if Tween then
-        Tween:Cancel()
-        Tween=nil
-    end
-end
-local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
-    CF=(typeof(CF)=='vector3' and CFrame.new(CF)) or CF
-    local Character=Player.Character
-    local PP=Character and Character.PrimaryPart
-    if PP then
-        if Tween then
-            Tween:Cancel()
-            Tween=nil
-        end
-        Tween=TS:Create(PP,TweenInfo.new((CF.Position-PP.Position).Magnitude/StudsPerSecond,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut,0,false,0),{CFrame=CF})
-        Tween:Play()
-        if YieldUntilFinish then
-            Tween.Completed:Wait()
-        end
-    end
-end
-if game.PlaceId == VirhstWoodlands then
-    Teleport(CFrame.new(765.694153,642.890198,1300,90295),79,false) -- [[ Floor 1 ]] --
-end
-if game.PlaceId == RedveilGrove then
-    Teleport(CFrame.new(-3759.11475, 153.322708, -2264.03149),79,false) -- [[ Floor 2 ]] --
-end
-if game.PlaceId == AvalancheExpense then
-    Teleport(CFrame.new(1072.8761,6641.06445,2062.68018),79,false) -- [[ Floor 3 ]] --
-end
-if game.PlaceId == HiddenWilds then
-    Teleport(CFrame.new(-1237.27783,5162.54834,-499.173859),79,false) -- [[ Floor 4 ]] --
-end
-if game.PlaceId == DesolateDunes then
-    Teleport(CFrame.new(-1068.71606,4220.74756,-2643.96558),79,false) -- [[ Floor 5 ]] --
-end
-if game.PlaceId == EntolomaGloomlands then
-    Teleport(CFrame.new(-91.4133453,1077.06531,-677.585815),79,false) -- [[ Floor 7 ]] --
-end
-if game.PlaceId == BloomingPlateau then
-    Teleport(CFrame.new(3874.46021,5723.00488,-9512.84863),79,false) -- [[ Floor 8 ]] --
-end
-if game.PlaceId == VaRok then
-    Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false) -- [[ Floor 9 ]] --
-end
-if game.PlaceId == Transylvania then
-    Teleport(CFrame.new(49.616806,260.644745,17934.1973),79,false) -- [[ Floor 10 ]] --
-end
-if game.PlaceId == Hypersiddia then
-    Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false) -- [[ Floor 11 ]]--
-end
-local MiniName='Dire Wolf'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(765.694153,642.890198,1300,90295),79,false)
-end
-end)
-local MiniName='Gorrock the Grove Protector'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-3759.11475, 153.322708, -2264.03149),79,false)
-end
-end)
-local MiniName='Alpha Icewhal'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(1072.8761,6641.06445,2062.68018),79,false)
-end
-end)
-local MiniName='Rotling'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-1237.27783,5162.54834,-499.173859),79,false)
-end
-end)
-local MiniName='Fire Scorpion'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-1068.71606,4220.74756,-2643.96558),79,false)
-end
-end)
-local MiniName='Frogazoid'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-91.4133453,1077.06531,-677.585815),79,false)
-end
-end)
-local MiniName='Hippogriff'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(3874.46021,5723.00488,-9512.84863),79,false)
-end
-end)
-local MiniName='Gargoyle Reaper'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false)
-end
-end)
-local MiniName='Baal'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName then
-        if Attacking then
-            repeat wait()until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(49.616806,260.644745,17934.1973),79,false)
-end
-end)
-local MiniName1='Da'
-local MiniName2='Ra'
-local MiniName3='Ka'
-local Attacking
-workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
-    wait()
-    if Boss.Name==MiniName1 then
-        if Attacking then
-            repeat wait() until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false)
-    elseif Boss.Name==MiniName2 then
-        if Attacking then
-            repeat wait() until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false)
-    elseif Boss.Name==MiniName3 then
-        if Attacking then
-            repeat wait() until not Attacking
-        end
-        Attacking=true
-        repeat
-            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
-            wait()
-        until
-            not Boss or not Boss.Parent
-            Attacking=false
-            Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false)
-end
-end)
-end, {
-    text = "Start"
-})
---[[
-MainS:Cheat('Checkbox', 'Prioritize Boss/Mini', function(State)
-    PriorityMode = State
-end)
-]]--
-noclip = false
-game:GetService('RunService').Stepped:connect(function()
-if noclip then
-game.Players.LocalPlayer.Character:WaitForChild'Humanoid':ChangeState(11)
-    end
-end)
-MainS:Cheat('Checkbox', 'No Clip', function()
-    noclip = not noclip
-end)
 --[[
 _G.PAF = false
 local FiltCategory = libWindow:Category('Filter Mobs')
@@ -1560,7 +1215,7 @@ end, {
     text = "Activate Speed"
 })
 
-MainS:Cheat('Button', 'Burst Store Chest: ', function()
+MainSS:Cheat('Button', 'Burst Store Chest: ', function()
 game.ReplicatedStorage.Database.CashShop["Release Celebration Chest"].Listed.Value = true
 game.ReplicatedStorage.Database.CashShop["Winter Season Chest"].Listed.Value = true
 game.ReplicatedStorage.Database.CashShop["Fall Season Chest"].Listed.Value = true
@@ -1613,9 +1268,556 @@ end
 end, {
     text = "Sprint"
 })
-MainSS:Cheat('Label', '')
-MainSS:Cheat('Label', '')
-MainSS:Cheat('Label', '')
+MainSS:Cheat('Button', 'Boss Only', function()
+local SnowflakeGorge = 6144637080
+local Hypersiddia = 5287433115
+local Transylvania = 2659143505
+local VaRok = 573267292
+local BloomingPlateau = 548878321
+local EntolomaGloomlands = 582198062
+local DesolateDunes = 580239979
+local HiddenWilds = 572487908
+local AvalancheExpense = 555980327
+local RedveilGrove = 548231754
+local VirhstWoodlands = 542351431
+local Tween
+local Player=game:GetService'Players'.LocalPlayer
+local TS=game:GetService'TweenService'
+local function CancelTeleport()
+    if Tween then
+        Tween:Cancel()
+        Tween=nil
+    end
+end
+local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
+    CF=(typeof(CF)=='vector3' and CFrame.new(CF)) or CF
+    local Character=Player.Character
+    local PP=Character and Character.PrimaryPart
+    if PP then
+        if Tween then
+            Tween:Cancel()
+            Tween=nil
+        end
+        Tween=TS:Create(PP,TweenInfo.new((CF.Position-PP.Position).Magnitude/StudsPerSecond,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut,0,false,0),{CFrame=CF})
+        Tween:Play()
+        if YieldUntilFinish then
+            Tween.Completed:Wait()
+        end
+    end
+end
+if game.PlaceId == VirhstWoodlands then
+    Teleport(CFrame.new(-2092.84131,319.95282,1664.3241),79,false) -- [[ Floor 1 ]] --
+end
+if game.PlaceId == RedveilGrove then
+    Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false) -- [[ Floor 2 ]] --
+end
+if game.PlaceId == AvalancheExpense then
+    Teleport(CFrame.new(-318.086517,4167.81885,-340.550507),79,false) -- [[ Floor 3 ]] --
+end
+if game.PlaceId == HiddenWilds then
+    Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false) -- [[ Floor 4 ]] --
+end
+if game.PlaceId == DesolateDunes then
+    Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false) -- [[ Floor 5 ]] --
+end
+if game.PlaceId == EntolomaGloomlands then
+    Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false) -- [[ Floor 7 ]] --
+end
+if game.PlaceId == BloomingPlateau then
+    Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false) -- [[ Floor 8 ]] --
+end
+if game.PlaceId == VaRok then
+    Teleport(CFrame.new(12481.2793, 428.948029,-3444.78247),79,false) -- [[ Floor 9 ]] --
+end
+if game.PlaceId == Transylvania then
+    Teleport(CFrame.new(317.134796,930.934631,23848.8262),79,false) -- [[ Floor 10 ]] --
+end
+if game.PlaceId == Hypersiddia then
+    print('NO BOSS in Floor 11')
+end
+if game.PlaceId == SnowflakeGorge then
+local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+local List = {}
+for _, k in next, workspace:GetDescendants() do
+    if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+end
+local Index = 2 
+firetouchinterest(PP, List[Index], 0)
+firetouchinterest(PP, List[Index], 1)   
+end
+
+local BossName='Wintula the Punisher'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-4661.48877,-319.864349,-1350.22363),79,false)
+end
+end)
+local BossName='Rahjin the Thief King'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-2092.84131,319.95282,1664.3241),79,false)
+end
+end)
+local BossName='Borik the BeeKeeper'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false)
+end
+end)
+local BossName="Ra'thae the Ice King"
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-318.086517,4167.81885,-340.550507),79,false)
+end
+end)
+local BossName='Irath the Lion'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false)
+end
+end)
+local BossName="Sa'jun the Centurian Chieftain"
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false)
+end
+end)
+local BossName='Smashroom'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false)
+end
+end)
+local BossName='Formaug the Jungle Giant'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false)
+end
+end)
+local BossName='Mortis the Flaming Sear'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(12346.4326,429.011932,-3503.52124),79,false)
+end
+end)
+local BossName='Grim the Overseer'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==BossName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(317.134796,930.934631,23848.8262),79,false)
+end
+end)
+end, {
+    text = "Start"
+})
+MainSS:Cheat('Button', 'Mini Only', function()
+local Hypersiddia = 5287433115
+local Transylvania = 2659143505
+local VaRok = 573267292
+local BloomingPlateau = 548878321
+local EntolomaGloomlands = 582198062
+local DesolateDunes = 580239979
+local HiddenWilds = 572487908
+local AvalancheExpense = 555980327
+local RedveilGrove = 548231754
+local VirhstWoodlands = 542351431
+local Tween
+local Player=game:GetService'Players'.LocalPlayer
+local TS=game:GetService'TweenService'
+local function CancelTeleport()
+    if Tween then
+        Tween:Cancel()
+        Tween=nil
+    end
+end
+local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
+    CF=(typeof(CF)=='vector3' and CFrame.new(CF)) or CF
+    local Character=Player.Character
+    local PP=Character and Character.PrimaryPart
+    if PP then
+        if Tween then
+            Tween:Cancel()
+            Tween=nil
+        end
+        Tween=TS:Create(PP,TweenInfo.new((CF.Position-PP.Position).Magnitude/StudsPerSecond,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut,0,false,0),{CFrame=CF})
+        Tween:Play()
+        if YieldUntilFinish then
+            Tween.Completed:Wait()
+        end
+    end
+end
+if game.PlaceId == VirhstWoodlands then
+    Teleport(CFrame.new(765.694153,642.890198,1300,90295),79,false) -- [[ Floor 1 ]] --
+end
+if game.PlaceId == RedveilGrove then
+    Teleport(CFrame.new(-3759.11475, 153.322708, -2264.03149),79,false) -- [[ Floor 2 ]] --
+end
+if game.PlaceId == AvalancheExpense then
+    Teleport(CFrame.new(1072.8761,6641.06445,2062.68018),79,false) -- [[ Floor 3 ]] --
+end
+if game.PlaceId == HiddenWilds then
+    Teleport(CFrame.new(-1237.27783,5162.54834,-499.173859),79,false) -- [[ Floor 4 ]] --
+end
+if game.PlaceId == DesolateDunes then
+    Teleport(CFrame.new(-1068.71606,4220.74756,-2643.96558),79,false) -- [[ Floor 5 ]] --
+end
+if game.PlaceId == EntolomaGloomlands then
+    Teleport(CFrame.new(-91.4133453,1077.06531,-677.585815),79,false) -- [[ Floor 7 ]] --
+end
+if game.PlaceId == BloomingPlateau then
+    Teleport(CFrame.new(3874.46021,5723.00488,-9512.84863),79,false) -- [[ Floor 8 ]] --
+end
+if game.PlaceId == VaRok then
+    Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false) -- [[ Floor 9 ]] --
+end
+if game.PlaceId == Transylvania then
+    Teleport(CFrame.new(49.616806,260.644745,17934.1973),79,false) -- [[ Floor 10 ]] --
+end
+if game.PlaceId == Hypersiddia then
+    Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false) -- [[ Floor 11 ]]--
+end
+local MiniName='Dire Wolf'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(765.694153,642.890198,1300,90295),79,false)
+end
+end)
+local MiniName='Gorrock the Grove Protector'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-3759.11475, 153.322708, -2264.03149),79,false)
+end
+end)
+local MiniName='Alpha Icewhal'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(1072.8761,6641.06445,2062.68018),79,false)
+end
+end)
+local MiniName='Rotling'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-1237.27783,5162.54834,-499.173859),79,false)
+end
+end)
+local MiniName='Fire Scorpion'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-1068.71606,4220.74756,-2643.96558),79,false)
+end
+end)
+local MiniName='Frogazoid'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-91.4133453,1077.06531,-677.585815),79,false)
+end
+end)
+local MiniName='Hippogriff'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(3874.46021,5723.00488,-9512.84863),79,false)
+end
+end)
+local MiniName='Gargoyle Reaper'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false)
+end
+end)
+local MiniName='Baal'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName then
+        if Attacking then
+            repeat wait()until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(49.616806,260.644745,17934.1973),79,false)
+end
+end)
+local MiniName1='Da'
+local MiniName2='Ra'
+local MiniName3='Ka'
+local Attacking
+workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
+    wait()
+    if Boss.Name==MiniName1 then
+        if Attacking then
+            repeat wait() until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false)
+    elseif Boss.Name==MiniName2 then
+        if Attacking then
+            repeat wait() until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false)
+    elseif Boss.Name==MiniName3 then
+        if Attacking then
+            repeat wait() until not Attacking
+        end
+        Attacking=true
+        repeat
+            Teleport(CFrame.new(Boss:WaitForChild'HumanoidRootPart'.Position + Vector3.new(0,15,0)),79,false)
+            wait()
+        until
+            not Boss or not Boss.Parent
+            Attacking=false
+            Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false)
+end
+end)
+end, {
+    text = "Start"
+})
+--[[
+MainS:Cheat('Checkbox', 'Prioritize Boss/Mini', function(State)
+    PriorityMode = State
+end)
+]]--
+noclip = false
+game:GetService('RunService').Stepped:connect(function()
+if noclip then
+game.Players.LocalPlayer.Character:WaitForChild'Humanoid':ChangeState(11)
+    end
+end)
+MainSS:Cheat('Checkbox', 'No Clip', function()
+    noclip = not noclip
+end)
 local PList = MainSS:Cheat('Dropdown', 'Player Name:', function(Option)
     _G.PTarget = Option
 end, {
@@ -1671,6 +1873,45 @@ MainSS:Cheat('Checkbox', 'Kill', function(State)
     coroutine.resume(coroutine.create(AttackPlayerTarget))
 end)
 
+local SList = MainSS:Cheat('Dropdown', 'Player Name:', function(Option)
+    _G.STarget = Option
+end, {
+    options = {'Player Name'}
+})
+_G.STarget = 'Select Name!'
+SList:SetValue('Select Name!')
+for a, plr in next, game.Players:GetChildren() do
+    if plr ~= game.Players.LocalPlayer then
+        SList:AddOption(plr.Name)
+    end
+end
+game.Players.ChildAdded:Connect(function(Player)
+    if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
+        SList:AddOption(Player.Name)
+    end
+end)
+game.Players.ChildRemoved:Connect(function(Player)
+    if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
+        SList:RemoveOption(Player.Name)
+    end
+end)
+
+MainSS:Cheat('Checkbox', 'Spectate Player: ', function(State)
+    SpectateMode = State
+end)
+coroutine.resume(coroutine.create(function()
+local PP = game:GetService('Players').LocalPlayer
+    while RunService.Heartbeat:Wait() do
+        if SpectateMode and _G.STarget ~= 'Select Name!' and workspace:FindFirstChild(_G.STarget) then
+            local a = workspace[_G.STarget] or workspace[PP.Name]
+            workspace.CurrentCamera.CameraType = Enum.CameraType.Custom;
+            workspace.CurrentCamera.CameraSubject = workspace[_G.STarget]:FindFirstChild('Humanoid');
+        else
+            workspace.CurrentCamera.CameraType = Enum.CameraType.Custom;
+            workspace.CurrentCamera.CameraSubject = PP.Character:FindFirstChild('Humanoid');
+        end
+    end
+end))
 local MiscSS = MiscCategory:Sector('')
 MiscSS:Cheat("Label", "Dismantle Items")
 MiscSS:Cheat('Textbox', 'Item Name:', function(NewText)
@@ -2072,9 +2313,41 @@ local a = VEL:Cheat('Dropdown', 'Vel Earned:', function(Option)
 end, {
     options = {0}
 })
+local OrigVel = vel.Value
 oldvel = vel.Value
-vel.Changed:connect(function(gainedvel)
-a:SetValue(gainedvel - oldvel)
+vel.Changed:connect(function(GainedVel)
+local OSTime = os.time();
+local Time = os.date('!*t', OSTime);
+local Avatar = 'https://cdn.discordapp.com/embed/avatars/4.png';
+local Content = '';
+local Embed = {
+    title = 'SwordBurst 2 Vel Logs Webhooks';
+    color = '99999';
+    type = "rich";
+    footer = { text = game.JobId };
+    author = {
+        name = 'Roblox Profile';
+        url = 'https://www.roblox.com/users/'..game:GetService('Players').LocalPlayer.UserId.."/profile";
+    };
+    fields = {
+        {
+            name = game:GetService('Players').LocalPlayer.Name ;
+            value = "```"..GainedVel-oldvel.."```";
+            inline = false;
+        }
+    };
+    timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);
+};
+(syn and syn.request or http_request) {
+    Url = _G.Webhooks;
+    Method = 'POST';
+    Headers = {
+        ['Content-Type'] = 'application/json';
+    };
+    Body = game:GetService'HttpService':JSONEncode( { content = Content; embeds = { Embed } } );
+};
+oldvel = vel.Value
+a:SetValue(GainedVel - OrigVel)
 end)
 
 local OriginalExp = game.ReplicatedStorage.Profiles[game.Players.LocalPlayer.Name].Stats.Exp.Value
@@ -2270,42 +2543,6 @@ local Embed = {
     };
     Body = game:GetService'HttpService':JSONEncode( { content = Content; embeds = { Embed } } );
 };
-end)
-
-local vel = game:GetService'ReplicatedStorage'.Profiles[game:GetService'Players'.LocalPlayer.Name].Stats.Vel
-oldvel = vel.Value
-vel.Changed:connect(function(gainedvel)
-local OSTime = os.time();
-local Time = os.date('!*t', OSTime);
-local Avatar = 'https://cdn.discordapp.com/embed/avatars/4.png';
-local Content = '';
-local Embed = {
-    title = 'SwordBurst 2 Vel Logs Webhooks';
-    color = '99999';
-    type = "rich";
-    footer = { text = game.JobId };
-    author = {
-        name = 'Roblox Profile';
-        url = 'https://www.roblox.com/users/'..game:GetService('Players').LocalPlayer.UserId.."/profile";
-    };
-    fields = {
-        {
-            name = game:GetService('Players').LocalPlayer.Name ;
-            value = "```"..gainedvel - oldvel.."```";
-            inline = false;
-        }
-    };
-    timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);
-};
-(syn and syn.request or http_request) {
-    Url = _G.Webhooks;
-    Method = 'POST';
-    Headers = {
-        ['Content-Type'] = 'application/json';
-    };
-    Body = game:GetService'HttpService':JSONEncode( { content = Content; embeds = { Embed } } );
-};
-oldvel = vel.Value
 end)
 end)
 end
