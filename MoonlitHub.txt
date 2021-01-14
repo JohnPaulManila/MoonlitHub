@@ -1857,10 +1857,10 @@ end
 function AttackPlayerTarget()
     local attk
     attk = RunService.Heartbeat:Connect(function()
-        if PlayersAttackings then
-            if Initialized then InitializeAoE() end
+        if PlayersAttackings1 then
+            if Initialized1 then InitializeAoE1() end
             for k, enemy in next, GetTarget() do
-                AttackEntity(workspace[_G.PTarget],true)
+                AttackEntity1(workspace[_G.PTarget],true)
             end
         else
             attk:Disconnect()
@@ -1869,7 +1869,7 @@ function AttackPlayerTarget()
 end
 
 MainSS:Cheat('Checkbox', 'Kill', function(State)
-    PlayersAttackings = State
+    PlayersAttackings1 = State
     coroutine.resume(coroutine.create(AttackPlayerTarget))
 end)
 
