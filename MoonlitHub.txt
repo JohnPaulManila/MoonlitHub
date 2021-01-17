@@ -180,9 +180,9 @@ if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
 end
 
 local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
-local libWindow=lib.new(true, "Moonlit Hub")
+local libWindow=lib.new(Theme, "Moonlit Hub")
 libWindow.ChangeToggleKey(Enum.KeyCode.F1)
-libWindow.ChangeBackgroundImage("rbxassetid://4692173685", 0.5)
+libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
 local RunService = game:GetService('RunService')
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
