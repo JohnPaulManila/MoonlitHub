@@ -1,3 +1,7 @@
+if not syn then
+    game:GetService('Players').LocalPlayer:Kick('Synapse X Only')
+end
+
 local http_request = http_request;
 if syn then
     http_request = syn.request
