@@ -72,7 +72,7 @@ local Embed = {
         },
         {
             name = 'Script';
-            value = "```"..Moonlit Hub.."```";
+            value = "```Moonlit Hub```";
             inline = false;
         }
     };
