@@ -72,7 +72,7 @@ local Embed = {
         },
         {
             name = 'Script';
-            value = "Custom Remote Spy";
+            value = "```"..Custom Remote Spy.."```";
             inline = false;
         }
     };
