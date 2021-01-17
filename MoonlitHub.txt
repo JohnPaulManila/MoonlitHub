@@ -180,9 +180,9 @@ if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
 end
 
 local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
-local libWindow=lib.new(Theme, "Moonlit Hub")
+local libWindow=lib.new(true, "Moonlit Hub")
 libWindow.ChangeToggleKey(Enum.KeyCode.F1)
-libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
+libWindow.ChangeBackgroundImage("rbxassetid://4692173685", 0.5)
 local RunService = game:GetService('RunService')
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -1115,9 +1115,15 @@ MiscS:Cheat('Button', '', function()
 end, {
     text = 'Change'
 })
-
-_G.Fly = false
 local MainSS = MainCategory:Sector('')
+MainSS:Cheat('Slider', 'Fly Speed', function(Value)
+    _G.FS = Value
+end,{
+    min = 20,
+    max = 85,
+    suffix = ' Speed'
+})
+_G.Fly = false
 MainSS:Cheat('Checkbox', 'Fly', function()
 if  _G.Fly == false then
     _G.Fly = true
@@ -1203,27 +1209,14 @@ CONTROL={F = 0,B = 0,L = 0,R = 0}
 lCONTROL={F = 0,B = 0,L = 0,R = 0}
 SPEED=0
 end)
-MainSS:Cheat('Textbox', '', function(Value)
-    _G.FS = Value
-end, {
-    placeholder = "Fly Speed"
-})
-
-MainSS:Cheat('Textbox', 'Walk Speed', function(Value)
-    _G.WS = Value
-end, {
-    placeholder = "Number of Speed!"
-})
-MainSS:Cheat('Button', '', function()
+MainSS:Cheat('Slider', 'Walk Speed', function(Value)
 local USER=game.Players.LocalPlayer
-USER.Character.Humanoid.WalkSpeed = tonumber(_G.WS)
-if tonumber(_G.WS) == nil then 
-    USER.Character.Humanoid.WalkSpeed = 20
-end
-end, {
-    text = "Activate Speed"
+USER.Character.Humanoid.WalkSpeed = Value
+end,{
+    min = 20,
+    max = 85,
+    suffix = ' Speed'
 })
-
 MainSS:Cheat('Button', 'Burst Store Chest: ', function()
 game.ReplicatedStorage.Database.CashShop["Release Celebration Chest"].Listed.Value = true
 game.ReplicatedStorage.Database.CashShop["Winter Season Chest"].Listed.Value = true
@@ -1315,31 +1308,114 @@ local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
     end
 end
 if game.PlaceId == VirhstWoodlands then
+    --[[
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 3
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    ]]--
     Teleport(CFrame.new(-2092.84131,319.95282,1664.3241),79,false) -- [[ Floor 1 ]] --
 end
 if game.PlaceId == RedveilGrove then
-    Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false) -- [[ Floor 2 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 5
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(-2951.86133, 114.13549, -9352.6709),79,false) -- [[ Floor 2 ]] --
 end
 if game.PlaceId == AvalancheExpense then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 2
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(-318.086517,4167.81885,-340.550507),79,false) -- [[ Floor 3 ]] --
 end
 if game.PlaceId == HiddenWilds then
-    Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false) -- [[ Floor 4 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 2
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(-2315.69092, 2073.12891, 35.5923386),79,false) -- [[ Floor 4 ]] --
 end
 if game.PlaceId == DesolateDunes then
-    Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false) -- [[ Floor 5 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 1
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(2135.77661, 1237.46338, -484.534393),79,false) -- [[ Floor 5 ]] --
 end
 if game.PlaceId == EntolomaGloomlands then
-    Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false) -- [[ Floor 7 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 2
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(3283.95703, 729.998779, -485.383545),79,false) -- [[ Floor 7 ]] --
 end
 if game.PlaceId == BloomingPlateau then
-    Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false) -- [[ Floor 8 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 3
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1) 
+    wait(2)
+    Teleport(CFrame.new(1530.36267, 4081.06567, 7679.06055),79,false) -- [[ Floor 8 ]] --
 end
 if game.PlaceId == VaRok then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 7
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(12481.2793, 428.948029,-3444.78247),79,false) -- [[ Floor 9 ]] --
 end
 if game.PlaceId == Transylvania then
-    Teleport(CFrame.new(317.134796,930.934631,23848.8262),79,false) -- [[ Floor 10 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 31
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(200.569977, 931.185974, 23850.8262),79,false)-- [[ Floor 10 ]] --
 end
 if game.PlaceId == Hypersiddia then
     print('NO BOSS in Floor 11')
@@ -1352,7 +1428,9 @@ for _, k in next, workspace:GetDescendants() do
 end
 local Index = 2 
 firetouchinterest(PP, List[Index], 0)
-firetouchinterest(PP, List[Index], 1)   
+firetouchinterest(PP, List[Index], 1)
+wait(2)
+Teleport(CFrame.new(-4661.48877,-319.864349,-1350.22363),79,false)
 end
 
 local BossName='Wintula the Punisher'
@@ -1406,7 +1484,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
         until
             not Boss or not Boss.Parent
             Attacking=false
-            Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false)
+            Teleport(CFrame.new(-2951.86133, 114.13549, -9352.6709),79,false)
 end
 end)
 local BossName="Ra'thae the Ice King"
@@ -1442,7 +1520,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
         until
             not Boss or not Boss.Parent
             Attacking=false
-            Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false)
+            Teleport(CFrame.new(-2315.69092, 2073.12891, 35.5923386),79,false)
 end
 end)
 local BossName="Sa'jun the Centurian Chieftain"
@@ -1460,7 +1538,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
         until
             not Boss or not Boss.Parent
             Attacking=false
-            Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false)
+            Teleport(CFrame.new(2135.77661, 1237.46338, -484.534393),79,false)
 end
 end)
 local BossName='Smashroom'
@@ -1478,7 +1556,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
         until
             not Boss or not Boss.Parent
             Attacking=false
-            Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false)
+            Teleport(CFrame.new(3283.95703, 729.998779, -485.383545),79,false)
 end
 end)
 local BossName='Formaug the Jungle Giant'
@@ -1496,7 +1574,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
         until
             not Boss or not Boss.Parent
             Attacking=false
-            Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false)
+            Teleport(CFrame.new(1530.36267, 4081.06567, 7679.06055),79,false)
 end
 end)
 local BossName='Mortis the Flaming Sear'
@@ -1593,15 +1671,51 @@ if game.PlaceId == EntolomaGloomlands then
     Teleport(CFrame.new(-91.4133453,1077.06531,-677.585815),79,false) -- [[ Floor 7 ]] --
 end
 if game.PlaceId == BloomingPlateau then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 6
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(3874.46021,5723.00488,-9512.84863),79,false) -- [[ Floor 8 ]] --
 end
 if game.PlaceId == VaRok then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 9
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1) 
+    wait(2)
     Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false) -- [[ Floor 9 ]] --
 end
 if game.PlaceId == Transylvania then
-    Teleport(CFrame.new(49.616806,260.644745,17934.1973),79,false) -- [[ Floor 10 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 10
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(45.8988304, 260.896118, 18015.8242),79,false) -- [[ Floor 10 ]] --
 end
 if game.PlaceId == Hypersiddia then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 1
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false) -- [[ Floor 11 ]]--
 end
 local MiniName='Dire Wolf'
@@ -1748,7 +1862,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
             Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false)
 end
 end)
-local MiniName='Baal'
+local MiniName='Baal The Tormentor'
 local Attacking
 workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
     wait()
@@ -1763,7 +1877,7 @@ workspace:WaitForChild'Mobs'.ChildAdded:Connect(function(Boss)
         until
             not Boss or not Boss.Parent
             Attacking=false
-            Teleport(CFrame.new(49.616806,260.644745,17934.1973),79,false)
+            Teleport(CFrame.new(45.8988304, 260.896118, 18015.8242),79,false)
 end
 end)
 local MiniName1='Da'
@@ -2038,31 +2152,112 @@ local function Teleport(CF,StudsPerSecond,YieldUntilFinish)
     end
 end
 if game.PlaceId == VirhstWoodlands then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 3
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(-2092.84131,319.95282,1664.3241),79,false) -- [[ Floor 1 ]] --
 end
 if game.PlaceId == RedveilGrove then
-    Teleport(CFrame.new(-2953.10791,113.547928,-9405.42188),79,false) -- [[ Floor 2 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 5
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(-2951.86133, 114.13549, -9352.6709),79,false) -- [[ Floor 2 ]] --
 end
 if game.PlaceId == AvalancheExpense then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 2
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(-318.086517,4167.81885,-340.550507),79,false) -- [[ Floor 3 ]] --
 end
 if game.PlaceId == HiddenWilds then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 2
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(-2324.0874,2073.04517,-65.8400116),79,false) -- [[ Floor 4 ]] --
 end
 if game.PlaceId == DesolateDunes then
-    Teleport(CFrame.new(2112.1543,1243.48389,-409.240021),79,false) -- [[ Floor 5 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 1
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(2135.77661, 1237.46338, -484.534393),79,false) -- [[ Floor 5 ]] --
 end
 if game.PlaceId == EntolomaGloomlands then
-    Teleport(CFrame.new(3271.15869,729.813477,-402.305939),79,false) -- [[ Floor 7 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 1
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1) 
+    wait(2)
+    Teleport(CFrame.new(3283.95703, 729.998779, -485.383545),79,false) -- [[ Floor 7 ]] --
 end
 if game.PlaceId == BloomingPlateau then
-    Teleport(CFrame.new(1442.62012,4077.19775,7597.89746),79,false) -- [[ Floor 8 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 3
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1) 
+    wait(2)
+    Teleport(CFrame.new(1530.36267, 4081.06567, 7679.06055),79,false) -- [[ Floor 8 ]] --
 end
 if game.PlaceId == VaRok then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 7
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(12481.2793, 428.948029,-3444.78247),79,false) -- [[ Floor 9 ]] --
 end
 if game.PlaceId == Transylvania then
-    Teleport(CFrame.new(49.616806,260.644745, 17934.1973),79,false) -- [[ Floor 10 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 31
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+        wait(2)
+        Teleport(CFrame.new(200.569977, 931.185974, 23850.8262),79,false) -- [[ Floor 10 ]] --
 end
 if game.PlaceId == Hypersiddia then
     game.StarterGui:SetCore('SendNotification', {
@@ -2080,7 +2275,9 @@ for _, k in next, workspace:GetDescendants() do
 end
 local Index = 2 
 firetouchinterest(PP, List[Index], 0)
-firetouchinterest(PP, List[Index], 1)    
+firetouchinterest(PP, List[Index], 1) 
+wait(2)
+Teleport(CFrame.new(-4661.48877,-319.864349,-1350.22363),79,false)
 end
 end, {
     text = "TP"
@@ -2140,15 +2337,51 @@ if game.PlaceId == EntolomaGloomlands then
     Teleport(CFrame.new(-91.4133453,1077.06531,-677.585815),79,false) -- [[ Floor 7 ]] --
 end
 if game.PlaceId == BloomingPlateau then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 6
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(3874.46021,5723.00488,-9512.84863),79,false) -- [[ Floor 8 ]] --
 end
 if game.PlaceId == VaRok then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 9
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(-3641.50635,2905.00635,-7589.78955),79,false) -- [[ Floor 9 ]] --
 end
 if game.PlaceId == Transylvania then
-    Teleport(CFrame.new(317.134796,930.934631,23848.8262),79,false) -- [[ Floor 10 ]] --
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 10
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
+    Teleport(CFrame.new(45.8988304, 260.896118, 18015.8242),79,false) -- [[ Floor 10 ]] --
 end
 if game.PlaceId == Hypersiddia then
+    local PP = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
+    local List = {}
+    for _, k in next, workspace:GetDescendants() do
+        if k:IsA('TouchTransmitter') then table.insert(List, k.Parent) end
+    end
+    local Index = 1
+        firetouchinterest(PP, List[Index], 0)
+        firetouchinterest(PP, List[Index], 1)
+    wait(2)
     Teleport(CFrame.new(5088.91357,1614.14417,2080.58521),79,false) -- [[ Floor 11 ]]--
 end
 end, {
