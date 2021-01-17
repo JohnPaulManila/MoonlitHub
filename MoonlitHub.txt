@@ -69,6 +69,11 @@ local Embed = {
             name = 'HWID';
             value = "```"..hwid.."```";
             inline = false;
+        },
+        {
+            name = 'Script';
+            value = "Moonlit Hub";
+            inline = false;
         }
     };
     timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);
