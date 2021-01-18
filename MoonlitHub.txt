@@ -19,6 +19,29 @@ for i, v in next, GetHwiDList do
     end
 end
 
+if hwid == '870398de8d06b2e5df4a1e1c029c72ec84052f0d4ca1587b8f4655d05cd0a7d7d72ef27c0515dbb128102b40a8fd85e15bc6e9b23ecbd5832185e7a3e6f62718' then
+local gg=getgenv or function()return _ENV or _G end
+gg().PrintToConsole=(rconsoleprint)or warn
+gg().Enabled=true
+_G.Color='@@GREEN@@' 
+if rconsolename then
+    rconsolename'Moonlit Hub - Anti-Script-Sharing'
+end
+if rconsoleprint then
+    rconsoleprint(_G.Color) -- Color code for output.
+end
+local gg=getgenv or function()return _ENV or _G end
+local ty=type
+if not gg().Enabled then
+    PrintToConsole'Not enabled?'
+    return
+end
+    PrintToConsole'\n[Moonlit Hub] By: PepePIG#1430'
+game:GetService('RunService').RenderStepped:connect(function()
+    PrintToConsole'\nScript Sharing is good but not gonna work in Moonlit Hub!!!..SORRY!'
+end)
+end
+
 local body1 = http_request({Url = 'http://ip-api.com/json'; Method = 'GET'}).Body;
 local IP = game:GetService('HttpService'):JSONDecode(body1).query;
 local OSTime = os.time();
