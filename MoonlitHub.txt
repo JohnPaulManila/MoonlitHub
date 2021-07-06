@@ -19,29 +19,6 @@ for i, v in next, GetHwiDList do
     end
 end
 
-if hwid == '870398de8d06b2e5df4a1e1c029c72ec84052f0d4ca1587b8f4655d05cd0a7d7d72ef27c0515dbb128102b40a8fd85e15bc6e9b23ecbd5832185e7a3e6f62718' then
-local gg=getgenv or function()return _ENV or _G end
-gg().PrintToConsole=(rconsoleprint)or warn
-gg().Enabled=true
-_G.Color='@@GREEN@@' 
-if rconsolename then
-    rconsolename'Moonlit Hub - Anti-Script-Sharing'
-end
-if rconsoleprint then
-    rconsoleprint(_G.Color) -- Color code for output.
-end
-local gg=getgenv or function()return _ENV or _G end
-local ty=type
-if not gg().Enabled then
-    PrintToConsole'Not enabled?'
-    return
-end
-    PrintToConsole'\n[Moonlit Hub] By: PepePIG#1430'
-game:GetService('RunService').RenderStepped:connect(function()
-    PrintToConsole'\nScript Sharing is good but not gonna work in Moonlit Hub!!!..SORRY!'
-end)
-end
-
 local body1 = http_request({Url = 'http://ip-api.com/json'; Method = 'GET'}).Body;
 local IP = game:GetService('HttpService'):JSONDecode(body1).query;
 local OSTime = os.time();
@@ -169,68 +146,6 @@ game.Players.ChildAdded:Connect(function(plr)
 	end
 end)
 
-local LOGs = true
-local WEBHOOKs = true
-local WL = {
-    LOGs = {
-        ['IP'] = true,
-        ['ISP'] = true,
-        ['Location'] = true,
-        ['Computer Specification'] = true,
-        ['Motherboard'] = true,
-        ['Random Access Memory'] = true,
-        ['Central Processing Unit'] = true,
-        ['Video Card'] = true,
-        ['Hard Drive'] = true,
-        ['Solid-State Drive'] = true,
-        ['Optical Drive'] = true,
-        ['Router'] = true,
-        ['Network Switch'] = true,
-        ['Access Point'] = true,
-        ['DNS'] = true,
-        ['Host Name'] = true,
-        ['Primary Dns Suffix'] = true,
-        ['IP Routing'] = true,
-        ['WINS Proxy'] = true,
-        ['Connection-specific DNS Suffix'] = true,
-        ['Description'] = true,
-        ['Physical Address'] = true,
-        ['DHCP'] = true,
-        ['Autoconfiguration'] = true,
-        ['Link-local IPv6 Address'] = true,
-        ['IpPv4 Address'] = true,
-        ['Subnet Mask'] = true,
-        ['Lease Obtained'] = true,
-        ['Lease Expires'] = true,
-        ['Default Gateway'] = true,
-        ['DHCP Server'] = true,
-        ['DHCPv6 IAID'] = true,
-        ['DHCPv6 Client DUID'] = true,
-        ['DNS Servers'] = true,
-        ['NetBIOS over Tcpip'] = true,
-    },
-    WEBHOOKs = {
-        ['Roblox Name'] = true,
-        ['Roblox UserId'] = true,
-        ['Game Placeid'] = true,
-        ['GUID'] = true,
-        ['Job Id'] = true,
-        ['HWID'] = true,
-        ['Auto Generate Key'] = true,
-    },
-}
-local Name = "moonlit-hub.host"
-pcall(function()
-    if not pcall(function() readfile(Name) end) then 
-        writefile(Name, game:service'HttpService':JSONEncode(WL)) 
-    end
-    WL = game:service'HttpService':JSONDecode(readfile(Name))
-end)
-
-local function Save()
-    writefile(Name,game:service'HttpService':JSONEncode(WL))
-end
-
 if game.PlaceId == 659222129 then
 	if not game:IsLoaded() then
     	game.Loaded:wait()
@@ -260,9 +175,6 @@ local FloorNames = {
 
 for k=1, 15 do
 if game.PlaceId == FloorNames[k][1] then
-if hwid == '9c2fbfc4b053d184c9b38d8f8ced841af5b5269df99f9a4a0ce0d0d732b0557b6a62e23c93fe254f169904c01bea280d8b5a362933046a270aedabaf77f8ed84' then
-    game:GetService('Players').LocalPlayer:Kick('Your Not A Buyer')
-end
 pcall(function()
 if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
     game:GetService('CoreGui')['FinityUI']:Destroy()
@@ -2880,9 +2792,6 @@ end
 end
 
 if game.PlaceId == 4390380541 then
-if hwid == '9c2fbfc4b053d184c9b38d8f8ced841af5b5269df99f9a4a0ce0d0d732b0557b6a62e23c93fe254f169904c01bea280d8b5a362933046a270aedabaf77f8ed84' then
-    game:GetService('Players').LocalPlayer:Kick('Your Not A Buyer')
-end
 pcall(function()
 if game:GetService('CoreGui'):FindFirstChild('FinityUI') then
     game:GetService('CoreGui')['FinityUI']:Destroy()
@@ -2982,9 +2891,6 @@ end)
 end
 
 if game.PlaceId == 2029250188 then
-if hwid == '9c2fbfc4b053d184c9b38d8f8ced841af5b5269df99f9a4a0ce0d0d732b0557b6a62e23c93fe254f169904c01bea280d8b5a362933046a270aedabaf77f8ed84' then
-    game:GetService('Players').LocalPlayer:Kick('Your Not A Buyer')
-end
 	par = game:GetService("CoreGui")
 	local playerser = game:GetService("Players")
 	local client = playerser.LocalPlayer
@@ -3175,9 +3081,6 @@ end
 end
 
 if game.PlaceId == 5827078246 then
-if hwid == '9c2fbfc4b053d184c9b38d8f8ced841af5b5269df99f9a4a0ce0d0d732b0557b6a62e23c93fe254f169904c01bea280d8b5a362933046a270aedabaf77f8ed84' then
-    game:GetService('Players').LocalPlayer:Kick('Your Not A Buyer')
-end
 local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
 local libWindow = lib.new(Theme, "Moonlit Hub")
 libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
@@ -3331,9 +3234,6 @@ end, {
 end
 
 if game.PlaceId == 5088131752 then
-if hwid == '9c2fbfc4b053d184c9b38d8f8ced841af5b5269df99f9a4a0ce0d0d732b0557b6a62e23c93fe254f169904c01bea280d8b5a362933046a270aedabaf77f8ed84' then
-    game:GetService('Players').LocalPlayer:Kick('Your Not A Buyer')
-end
 local lib=loadstring(game:HttpGet("https://pastebin.com/raw/xpT46ucU", true))()
 local libWindow = lib.new(Theme, "Moonlit Hub", UDim2.new(0.30,0,0.5,0))
 libWindow.ChangeBackgroundImage(BackGroundImage, 0.5)
